@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draw Eye Icon with Pure CSS</title>
+  <style>
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .eye {
+      width: 30px;
+      height: 30px;
+      border: solid 1px #000;
+      border-radius: 75% 15%;
+      position: absolute;
+      transform: rotate(45deg);
+      background-color: white;
+      transition: background-color 1s ease;
+      animation: changeColor 5s infinite;
+    }
+
+    .eye:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: solid 1px #000;
+      border-radius: 50%;
+      left: 3px;
+      top: 3px;
+    }
+
+    @keyframes changeColor {
+
+      0%,
+      50% {
+        background-color: white;
+      }
+
+      51%,
+      100% {
+        background-color: black;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const numEyes = 100; // Número de olhos que você deseja criar
+      const body = document.querySelector("body");
+      const eyes = [];
+      const eyeSize = 5; // Tamanho do olho com borda
+
+      function isOverlapping(newEye) {
+        for (const eye of eyes) {
+          const dx = parseFloat(newEye.style.left) - parseFloat(eye.style.left);
+          const dy = parseFloat(newEye.style.top) - parseFloat(eye.style.top);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < eyeSize) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      for (let i = 0; i < numEyes; i++) {
+        const eye = document.createElement("div");
+        eye.className = "eye";
+        let left, top;
+        let attempts = 0;
+
+        do {
+          left = Math.random() * 100 + "vw";
+          top = Math.random() * 100 + "vh";
+          eye.style.left = left;
+          eye.style.top = top;
+          attempts++;
+        } while (isOverlapping(eye) && attempts < 100);
+
+        if (attempts < 100) {
+          body.appendChild(eye);
+          eyes.push(eye);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

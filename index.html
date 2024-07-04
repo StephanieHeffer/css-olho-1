@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draw Eye Icon with Pure CSS</title>
+  <style>
+    .eye {
+      margin: 100px;
+      width: 13px;
+      height: 13px;
+      border: solid 1px #000;
+      border-radius: 75% 15%;
+      position: relative;
+      transform: rotate(45deg);
+      animation: changeColor 5s infinite;
+      /* Adicionando a animação de alteração de cor */
+    }
+
+    .eye:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border: solid 1px #000;
+      border-radius: 50%;
+      left: 3px;
+      top: 3px;
+    }
+
+    @keyframes changeColor {
+
+      0%,
+      50% {
+        background-color: white;
+        /* Cor de fundo padrão */
+      }
+
+      51%,
+      100% {
+        background-color: black;
+        /* Cor de fundo alterada */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="eye"></div>
+</body>
+
+</html>
